@@ -15,41 +15,6 @@
 
 <body>
   <header>
-    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">DEQ WM</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="/deq/home/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Checklists</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/deq/letters/">Letters</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/deq/facilityList/">Facilities</a>
-          </li>
-          {% if isAdmin == True %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">Staff</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="/deq/logout/">Sign Out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
       {% include 'nav.html' %}
   </header>
   <main>
