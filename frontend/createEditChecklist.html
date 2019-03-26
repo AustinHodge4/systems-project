@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>DEQ WM App</title>
+</head>
+
+<body>
+  <header>
+    {% include 'nav.html' %}
+  </header>
+  <main>
+    <div class="pt-4"></div>
+    <div class="container">
+        <h1>Create Checklist</h1>
+        <div class="pt-4"></div>
+
+        <form name="6" method="POST" action="/deq/createEditChecklist/">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{id}}" />
+            <div class="form-group">
+                <label for="name">Checklist Name</label>
+                <input type="text" required class="form-control" name="name" id="name" aria-describedby="name" value="{{name}}" placeholder="Enter Facility Name">
+            </div>
+            <div class="form-group">
+<<<<<<< HEAD
+                <label for="facility">Facility</label>
+                <select>
+=======
+                <label for="street">Facility</label>
+                <select name="facility" required class="custom-select" id="facility">
+>>>>>>> 7745639e16b7fd84a59cd4b6b642e7f862a140af
+                  {% for facility in facilities %}
+                    <option id="{{facility.pk}}" value="{{facility.pk}}">{{facility.facility_name}}</option>
+                  {% empty %}
+                  <option value="none">Select A Facility</option>
+                  {%endfor%}
+                </select>
+                <script  type="text/javascript"> 
+                  window.onload = function() {
+                    if ("{{selected_facility}}" != '')  {
+                    document.getElementById("{{selected_facility}}").selected = true;
+                    } 
+                  }
+               </script> 
+            </div>
+<<<<<<< HEAD
+            <div class="form-group">
+                <label for="released">Released To Environment</label>
+                <input type="checkbox" required class="form-control" id="released" name="released" value="{{released}}" >
+            </div>
+            <div class="form-group">
+                <label for="residue">Residue</label>
+                <input type="checkbox" required class="form-control" id="residue" name="residue" value="{{residue}}" >
+            </div>
+            <div class="form-group">
+                <label for="burned">Burned</label>
+                <input type="checkbox" required class="form-control" id="burned" name="burned" value="{{burned}}" >
+            </div>
+            <div class="form-group">
+                <label for="volume">Records Of Volume</label>
+                <input type="checkbox" required class="form-control" id="volume" name="volume" value="{{volume}}">
+            </div>
+            <div class="form-group">
+                <label for="disposal">District</label>
+                <input type="checkbox" class="form-control" id="disposal" name="disposal" value="{{disposal}}">
+            </div>
+            <div class="form-group">
+                <label for="recycled_m">Recyclable Materials</label>
+                <input type="checkbox" class="form-control" id="recycled_m" name="recycled_m" value="{{recycled_m}}">
+=======
+            
+            <div class="form-check">
+                <input type="checkbox"  class="form-check-input" id="released" name="released" {% if released %}checked{%endif%}  >
+                <label class="form-check-label" for="released">Released To Environment</label>
+>>>>>>> 7745639e16b7fd84a59cd4b6b642e7f862a140af
+            </div>
+            <div class="form-check">
+                <input type="checkbox"  class="form-check-input" id="residue" name="residue" {% if residue %}checked{%endif%}  >
+                <label class="form-check-label" for="residue">Residue</label>
+
+            </div>
+            <div class="form-check">
+                <input type="checkbox"  class="form-check-input" id="burned" name="burned" {% if burned %}checked{%endif%}  >
+                <label class="form-check-label" for="burned">Burned</label>
+              </div>
+            <div class="form-check">
+                
+                <input type="checkbox"  class="form-check-input" id="volume" name="volume" {% if volume %}checked{%endif%} >
+                <label class="form-check-label" for="volume">Records Of Volume</label>
+              </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="disposal" name="disposal" {% if disposal %}checked{%endif%} />
+                <label class="form-check-label" for="disposal">District</label>
+
+              </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="recycled_m" name="recycled_m" {% if recycled_m %}checked{%endif%} >
+                <label class="form-check-label" for="recycled_m">Recyclable Materials</label>
+
+              </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="recycled_s" name="recycled_s" {% if recycled_s %}checked{%endif%} >
+                <label class="form-check-label" for="recycled_s">Recyclable On Site</label>
+
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
+
+</html>

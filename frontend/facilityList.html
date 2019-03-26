@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>DEQ WM App</title>
+</head>
+
+<body>
+  <header>
+        {% include 'nav.html' %}
+  </header>
+  <main>
+    <div class="pt-4"></div>
+    <div class="container">
+        <a href="/deq/createEditFacility/" class="btn btn-primary" role="button" aria-pressed="true">Create New Facility</a>
+        <div class="pt-4"></div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Street</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Zipcode</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Latest Inspection</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for facility in facilities %}
+                    <tr> 
+                        <th scope="row">{{facility.facility_name}}</th>
+                        <td>{{facility.street_address}}</td>
+                        <td>{{facility.city}}</td>
+                        <td>{{facility.zipcode}}</td>
+                        <td>{{facility.telephone}}</td>
+                        <td>{{facility.latest_inspection}}</td>
+                        <td>
+                            <a href="/deq/createEditFacility?id={{facility.pk}}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
+                            <a href="/deq/createEditFacility?id={{facility.pk}}&delete" class="btn btn-primary" role="button" aria-pressed="true">Delete</a>
+                        </td>
+                    </tr>
+            
+                {% empty %}
+                <tr>
+                    <td colspan=6>No Facilities Created</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+          </div>
+    </div>
+
+
+
+  </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
+
+</html>
