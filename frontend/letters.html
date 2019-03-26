@@ -15,58 +15,42 @@
 </head>
 <body>
   <header>
-    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">DEQ WM</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/deq/home/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Reports</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#">Checklists</a>
-          </li>
-           <li class="nav-item active">
-            <a class="nav-link" href="/deq/letters/">Letters</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Facilities</a>
-          </li>
-          {% if isAdmin == True %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">Staff</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="/deq/logout/">Sign Out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    {% include "nav.html" %}
   </header>
     <main>
-    <div class="pt-4"></div>
-    <div class="container">
-    <div class="jumbotron jumbotron-fluid rounded-lg">
-  <div class="container">
-    <h1 class="display-4">DEQ Waste Management</h1>
-  <p class="lead">The primary purpose of Waste Management (WM) is to protect public health and 
-  the environment by assuring that solid and hazardous wastes and underground storage tanks are managed properly, 
-  and that existing contamination is cleaned up.</p>
-  <hr class="my-4">
-  <p> This is accomplished through the Hazardous Waste, Solid Waste, Superfund, 
-  and Underground Storage Tank Programs. In addition, 
-  the Brownfields Program promotes redevelopment of abandoned, idle and/or under-utilized sites.</p>
-  <a class="btn btn-primary btn-lg" href="https://deq.nc.gov/about/divisions/waste-management" role="button">Learn more</a>
-  </div>
-</div>
+    <div class = "pt-4"></div>
+    <div class = "container">
+      <div class="pt-4"></div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Letter Subject</th>
+                    <th scope="col">Date Modified</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for letter in letters %}
+                  <th scope="row">{{letter.letter_subject}}</th>
+                  <td>{{letter.date_modified}}</td>
+                  <!--<td>
+                    <a href="/deq/createEditFacility?id={{facility.pk}}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
+                    <a href="/deq/createEditFacility?id={{facility.pk}}&delete" class="btn btn-primary" role="button" aria-pressed="true">Delete</a>
+                  </td> -->
+
+                {% empty %}
+
+                <tr>
+                  <td colspan=6>No Letters generated</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+          </div>
+    </div>
+    </div>
+
 
 </main>
  <!-- Optional JavaScript -->

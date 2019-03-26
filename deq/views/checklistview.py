@@ -63,7 +63,11 @@ def createEditChecklist(request):
 
         Are the hazardous secondary materials being recycled on-site? (recycled_on_site) 
         '''
+
         letter = Letters()
+        letter.checklist = Checklist.objects.get(pk=int(request.POST['checklist']))
+        letter.subject_name = checklist.checklist_name()
+        
 
     elif request.method == "GET":
         print("Here")

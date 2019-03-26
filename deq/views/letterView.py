@@ -8,7 +8,7 @@ from deq.models import Letters
 
 @login_required(login_url="/deq/login/")
 @ensure_csrf_cookie
-def letterList(request):
+def letter(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
     context_dict['letters'] = Letters.objects.all()
@@ -16,6 +16,6 @@ def letterList(request):
 
 @login_required(login_url='/deq/login/')
 @ensure_csrf_cookie
-def editDeleteLetter(request):
-
-    return 0
+def viewEditLetter(request):
+    context_dict = {}
+    return render(request, 'viewEditLetters.html', context_dict)
