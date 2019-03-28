@@ -19,39 +19,37 @@
   <main>
     <div class="pt-4"></div>
     <div class="container">
-        <a href="/deq/createEditFacility/" class="btn btn-primary" role="button" aria-pressed="true">Create New Facility</a>
+        <a href="/deq/createEditStaff/" class="btn btn-primary" role="button" aria-pressed="true">Add New Employee</a>
         <div class="pt-4"></div>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Street</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Zipcode</th>
-                    <th scope="col">Telephone</th>
-                    <th scope="col">Latest Inspection</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Admin</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for facility in facilities %}
+                {% for staff in staffs %}
                     <tr> 
-                        <th scope="row">{{facility.facility_name}}</th>
-                        <td>{{facility.street_address}}</td>
-                        <td>{{facility.city}}</td>
-                        <td>{{facility.zipcode}}</td>
-                        <td>{{facility.telephone}}</td>
-                        <td>{{facility.latest_inspection}}</td>
+                        <th scope="row">{{staff.first_name}}</th>
+                        <td>{{staff.last_name}}</td>
+                        <td>{{staff.username}}</td>
+                        <td>{{staff.email}}</td>
+                        <td>{{staff.is_superuser}}</td>
                         <td>
-                            <a href="/deq/createEditFacility?id={{facility.pk}}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
-                            <a href="/deq/createEditFacility?id={{facility.pk}}&delete" class="btn btn-secondary" role="button" aria-pressed="true">Delete</a>
+                            <a href="/deq/createEditStaff?id={{staff.pk}}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
+                            <a href="/deq/createEditStaff?id={{staff.pk}}&delete" class="btn btn-secondary" role="button" aria-pressed="true">Delete</a>
                         </td>
                     </tr>
             
                 {% empty %}
                 <tr>
-                    <td colspan=6>No Facilities Created</td>
+                    <td colspan=6>No Staff Created</td>
                 </tr>
                 {% endfor %}
                 </tbody>

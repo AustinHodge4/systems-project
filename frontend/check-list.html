@@ -30,7 +30,6 @@
               <th scope="col">Name</th>
               <th scope="col">Facility</th>
               <th scope="col">Date Modified</th>
-              <th scope="col">Released To Environment</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -40,18 +39,17 @@
               <th scope="row">{{checklist.checklist_name}}</th>
               <td>{{checklist.facility.facility_name}}</td>
               <td>{{checklist.date_modified}}</td>
-              <td>{{checklist.released_to_environment}}</td>
               <td>
                 <a href="/deq/createEditChecklist?id={{checklist.pk}}" class="btn btn-primary" role="button"
                   aria-pressed="true">Edit</a>
-                <a href="/deq/createEditChecklist?id={{checklist.pk}}&delete" class="btn btn-primary" role="button"
+                <a href="/deq/createEditChecklist?id={{checklist.pk}}&delete" class="btn btn-secondary" role="button"
                   aria-pressed="true">Delete</a>
               </td>
             </tr>
 
             {% empty %}
             <tr>
-              <td colspan=6>No Check-List Created</td>
+              <td colspan=6>No Checklist Created</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -72,7 +70,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
 </body>
-
-</html>
 
 </html>

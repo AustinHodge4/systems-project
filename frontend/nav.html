@@ -24,12 +24,15 @@
             </li>
             {% if isAdmin == True %}
             <li class="nav-item">
-                <a class="nav-link" href="#">Staff</a>
+                <a class="nav-link" href="/deq/staff/">Staff</a>
             </li>
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="/deq/logout/">Sign Out</a>
             </li>
         </ul>
+        <span class="navbar-text">
+            Welcome, {{user.username}}
+        </span>
     </div>
 </nav>
