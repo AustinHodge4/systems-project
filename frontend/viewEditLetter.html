@@ -22,24 +22,24 @@
     <div class="container">
       <div class="pt-4"></div>
       <div class="card">
-      <div class="card-header">
-      {{name}}
-      </div>
-      <div class="card-body">
-      
-      <p class="card-text">{{content|linebreaks}}</p>
-      <a href="/deq/letters" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>
-  </div>
-</div>
-{% if date_modified %}
-        <div class="pt-4"></div>
-        <div class="alert alert-primary" role="alert">
-          Last Modified: {{date_modified}}
+        <h5 class="card-header">
+          {{name}}
+        </h5>
+        <div class="card-body">
+
+          <p class="card-text">{{content|linebreaks}}</p>
+          <a href="/deq/letters" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>
         </div>
-        {% endif %}
-      
+      </div>
+      {% if date_modified %}
+      <div class="pt-4"></div>
+      <div class="alert alert-primary" role="alert">
+        Last Modified: {{date_modified}}
+      </div>
+      {% endif %}
+
     </div>
-    <hr />
+    
   </main>
 
   <!-- Optional JavaScript -->
