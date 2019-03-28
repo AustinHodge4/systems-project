@@ -1,1 +1,4 @@
-/deqsite/db.sqlite3
+deqsite/db.sqlite3
+deqsite/__pycache__/
+deqsite/deq/__pycache__/
+deqsite/*.pyc

@@ -20,47 +20,67 @@
   <main>
     <div class="pt-4"></div>
     <div class="container">
-        <h1>Create Facility</h1>
+      <h1>Create Facility</h1>
+      <div class="pt-4"></div>
+
+      <form name="createEditFacility" method="POST" action="/deq/createEditFacility/">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{id}}" />
+
+        <div class="form-group">
+          <label for="name">Facility Name</label>
+          <input type="text" required class="form-control" name="name" id="name" aria-describedby="name"
+            value="{{name}}" placeholder="Enter Facility Name">
+        </div>
+
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input type="text" required class="form-control" id="street" name="street" value="{{street}}"
+            placeholder="Street Name">
+        </div>
+
+        <div class="form-group">
+          <label for="county">County</label>
+          <input type="text" required class="form-control" id="county" name="county" value="{{county}}"
+            placeholder="County">
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" required class="form-control" id="city" name="city" value="{{city}}" placeholder="City">
+        </div>
+
+        <div class="form-group">
+          <label for="zipcode">Zipcode</label>
+          <input type="text" required class="form-control" id="zipcode" name="zipcode" value="{{zipcode}}"
+            placeholder="Zipcode">
+        </div>
+
+        <div class="form-group">
+          <label for="district">District</label>
+          <input type="text" class="form-control" id="district" name="district" value="{{district}}"
+            placeholder="District">
+        </div>
+
+        <div class="form-group">
+          <label for="telephone">Telephone</label>
+          <input type="phone" class="form-control" id="telephone" name="telephone" value="{{telephone}}"
+            placeholder="Telephone">
+        </div>
+
+        {% if latest_inspection %}
         <div class="pt-4"></div>
-        
-        <form name="createEditFacility" method="POST" action="/deq/createEditFacility/">
-            {% csrf_token %}
-            <input type="hidden" name="id" value="{{id}}" />
-            <div class="form-group">
-                <label for="name">Facility Name</label>
-                <input type="text" required class="form-control" name="name" id="name" aria-describedby="name" value="{{name}}" placeholder="Enter Facility Name">
-            </div>
-            <div class="form-group">
-                <label for="street">Street</label>
-                <input type="text" required class="form-control" id="street" name="street" value="{{street}}" placeholder="Street Name">
-            </div>
-            <div class="form-group">
-                <label for="county">County</label>
-                <input type="text" required class="form-control" id="county" name="county" value="{{county}}" placeholder="County">
-            </div>
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" required class="form-control" id="city" name="city" value="{{city}}" placeholder="City">
-            </div>
-            <div class="form-group">
-                <label for="zipcode">Zipcode</label>
-                <input type="text" required class="form-control" id="zipcode" name="zipcode" value="{{zipcode}}" placeholder="Zipcode">
-            </div>
-            <div class="form-group">
-                <label for="district">District</label>
-                <input type="text" class="form-control" id="district" name="district" value="{{district}}" placeholder="District">
-            </div>
-            <div class="form-group">
-                <label for="telephone">Telephone</label>
-                <input type="phone" class="form-control" id="telephone" name="telephone" value="{{telephone}}" placeholder="Telephone">
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="alert alert-primary" role="alert">
+          Latest Inspection: {{latest_inspection}}
+        </div>
+        {% endif %}
+
+        <hr />
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/deq/facilityList" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>
+      </form>
     </div>
-
-
-
   </main>
 
   <!-- Optional JavaScript -->
@@ -75,7 +95,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
 </body>
-
-</html>
 
 </html>

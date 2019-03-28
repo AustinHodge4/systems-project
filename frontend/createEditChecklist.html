@@ -20,73 +20,99 @@
   <main>
     <div class="pt-4"></div>
     <div class="container">
-        <h1>Create Checklist</h1>
+      <h1>Create Checklist</h1>
+      <div class="pt-4"></div>
+
+      <form name="6" method="POST" action="/deq/createEditChecklist/">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{id}}" />
+        
+        <div class="form-group">
+          <label for="name">Checklist Name</label>
+          <input type="text" required class="form-control" name="name" id="name" aria-describedby="name"
+            value="{{name}}" placeholder="Enter Checklist Name">
+        </div>
+
+        <div class="form-group">
+          <label for="street">Facility</label>
+          <select name="facility" required class="custom-select" id="facility">
+            {% for facility in facilities %}
+            <option id="{{facility.pk}}" value="{{facility.pk}}">{{facility.facility_name}}</option>
+            {% empty %}
+            <option value="none">Select A Facility</option>
+            {%endfor%}
+          </select>
+          <script type="text/javascript">
+            window.onload = function () {
+              if ("{{selected_facility}}" != '') {
+                document.getElementById("{{selected_facility}}").selected = true;
+              }
+            }
+          </script>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="released" name="released"
+            {% if released %}checked{%endif%}>
+          <label class="custom-control-label" for="released">Are the HSM (Hazardous Secondary Materials) being released into the environment?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="residue" name="residue"
+            {% if residue %}checked{%endif%}>
+          <label class="custom-control-label" for="residue">Are any residuals generated from the recycling
+            process?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="burned" name="burned" {% if burned %}checked{%endif%}>
+          <label class="custom-control-label" for="burned">Are these materials burned for energy recovery or used to
+            produce a fuel?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="volume" name="volume" {% if volume %}checked{%endif%}>
+          <label class="custom-control-label" for="volume">Does the generator maintain records on the volume of
+            recyclable materials generated per
+            month and the volume recycled per month?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="disposal" name="disposal"
+            {% if disposal %}checked{%endif%} />
+          <label class="custom-control-label" for="disposal">Are these materials used in a manner constituting disposal
+            or, once reclaimed, used in a
+            manner constituting disposal?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="recycled_m" name="recycled_m"
+            {% if recycled_m %}checked{%endif%}>
+          <label class="custom-control-label" for="recycled_m">Are these materials recyclable materials from which
+            precious metals are reclaimed or spent
+            lead-acid batteries being reclaimed?</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="recycled_s" name="recycled_s"
+            {% if recycled_s %}checked{%endif%}>
+          <label class="custom-control-label" for="recycled_s">Are the hazardous secondary materials being recycled
+            on-site?</label>
+        </div>
+
+        {% if date_modified %}
         <div class="pt-4"></div>
+        <div class="alert alert-primary" role="alert">
+          Last Modified: {{date_modified}}
+        </div>
+        {% endif %}
 
-        <form name="6" method="POST" action="/deq/createEditChecklist/">
-            {% csrf_token %}
-            <input type="hidden" name="id" value="{{id}}" />
-            <div class="form-group">
-                <label for="name">Checklist Name</label>
-                <input type="text" required class="form-control" name="name" id="name" aria-describedby="name" value="{{name}}" placeholder="Enter Facility Name">
-            </div>
-            <div class="form-group">
-                <label for="street">Facility</label>
-                <select name="facility" required class="custom-select" id="facility">
-                  {% for facility in facilities %}
-                    <option id="{{facility.pk}}" value="{{facility.pk}}">{{facility.facility_name}}</option>
-                  {% empty %}
-                  <option value="none">Select A Facility</option>
-                  {% endfor %}
-                </select>
-                <script  type="text/javascript"> 
-                  window.onload = function() {
-                    if ("{{selected_facility}}" != '')  {
-                    document.getElementById("{{selected_facility}}").selected = true;
-                    } 
-                  }
-               </script> 
-            </div>
-            
-            <div class="form-check">
-                <input type="checkbox"  class="form-check-input" id="released" name="released" {% if released %}checked{%endif%}  >
-                <label class="form-check-label" for="released">Released To Environment</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox"  class="form-check-input" id="residue" name="residue" {% if residue %}checked{%endif%}  >
-                <label class="form-check-label" for="residue">Residue</label>
+        <hr />
 
-            </div>
-            <div class="form-check">
-                <input type="checkbox"  class="form-check-input" id="burned" name="burned" {% if burned %}checked{%endif%}  >
-                <label class="form-check-label" for="burned">Burned</label>
-              </div>
-            <div class="form-check">
-                
-                <input type="checkbox"  class="form-check-input" id="volume" name="volume" {% if volume %}checked{%endif%} >
-                <label class="form-check-label" for="volume">Records Of Volume</label>
-              </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="disposal" name="disposal" {% if disposal %}checked{%endif%} />
-                <label class="form-check-label" for="disposal">District</label>
-
-              </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="recycled_m" name="recycled_m" {% if recycled_m %}checked{%endif%} >
-                <label class="form-check-label" for="recycled_m">Recyclable Materials</label>
-
-              </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="recycled_s" name="recycled_s" {% if recycled_s %}checked{%endif%} >
-                <label class="form-check-label" for="recycled_s">Recyclable On Site</label>
-
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/deq/checklist" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>
+      </form>
     </div>
-
-
-
   </main>
 
   <!-- Optional JavaScript -->
@@ -101,7 +127,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
 </body>
-
-</html>
 
 </html>

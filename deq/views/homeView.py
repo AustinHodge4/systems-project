@@ -9,5 +9,5 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def home(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
-    print(context_dict)
+    context_dict['user'] = request.user
     return render(request, 'index.html', context_dict)

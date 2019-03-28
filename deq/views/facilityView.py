@@ -9,6 +9,7 @@ from deq.models import Facility
 def facilityList(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
+    context_dict['user'] = request.user
     context_dict['facilities'] = Facility.objects.all()
     return render(request, 'facilityList.html', context_dict)
 
@@ -17,12 +18,14 @@ def facilityList(request):
 def createEditFacility(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
+    context_dict['user'] = request.user
     if request.method == "POST":
         facility = None
         if 'id' in request.POST and not request.POST['id'] == '':
             facility = Facility.objects.get(pk=int(request.POST['id']))
         else:
             facility = Facility()
+
         facility.facility_name = request.POST['name']
         facility.street_address = request.POST['street']
         facility.county = request.POST['county']
@@ -33,6 +36,7 @@ def createEditFacility(request):
         # Dont set latest inspection because the checklist needs to be
         # created then the inspection date can be set
         facility.save()
+
     elif request.method == "GET":
         if "id" in request.GET:
             facility = Facility.objects.get(pk=int(request.GET['id']))
@@ -41,6 +45,7 @@ def createEditFacility(request):
                 return redirect('/deq/facilityList/')
 
             context_dict['id'] = request.GET['id']
+            context_dict['latest_inspection'] = facility.latest_inspection
 
             context_dict['name'] = facility.facility_name
             context_dict['street'] = facility.street_address

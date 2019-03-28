@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 from deq.models import Checklist, Facility, Letters
-from datetime import datetime
+from django.utils import timezone
 
 @login_required(login_url='/deq/login/')
 @ensure_csrf_cookie
 def checklist(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
+    context_dict['user'] = request.user
     context_dict['checklists'] = Checklist.objects.all()
     return render(request, 'check-list.html', context_dict)
 
@@ -18,6 +19,7 @@ def checklist(request):
 def createEditChecklist(request):
     context_dict = {}
     context_dict['isAdmin'] = request.user.is_superuser
+    context_dict['user'] = request.user
     if request.method == "POST":
         checklist = None
         if 'id' in request.POST and not request.POST['id'] == '':
@@ -26,9 +28,15 @@ def createEditChecklist(request):
         else:
             # Create new checklist 
             checklist = Checklist()
+
         checklist.checklist_name = request.POST['name']
-        checklist.facility = Facility.objects.get(pk=int(request.POST['facility']))
-        checklist.date_modified = datetime.now()
+
+        facility = Facility.objects.get(pk=int(request.POST['facility']))
+        facility.latest_inspection = timezone.now()
+        facility.save()
+
+        checklist.facility = facility
+        checklist.date_modified = timezone.now()
         checklist.released_to_environment = 'released' in request.POST
         checklist.residue = 'residue' in request.POST
         checklist.burned = 'burned' in request.POST
@@ -37,9 +45,8 @@ def createEditChecklist(request):
         checklist.recyclable_materials = 'recycled_m' in request.POST
         checklist.recycled_on_site = 'recycled_s' in request.POST
 
-        # Dont set latest inspection because the checklist needs to be
-        # created then the inspection date can be set
         checklist.save()
+
         # Create letters here and ser checklist foreign key to created checklist up above
         # Content on letter should be a string with details of these questions
 
@@ -88,7 +95,6 @@ def createEditChecklist(request):
         letter.save()
 
     elif request.method == "GET":
-        print("Here")
         if "id" in request.GET:
             checklist = Checklist.objects.get(pk=int(request.GET['id']))
             if "delete" in request.GET:
@@ -98,8 +104,9 @@ def createEditChecklist(request):
 
             context_dict['name'] = checklist.checklist_name
             context_dict['selected_facility'] = checklist.facility.pk
+            context_dict['date_modified'] = checklist.date_modified
+            
             context_dict['released'] =checklist.released_to_environment
-
             context_dict['residue'] = checklist.residue
             context_dict['burned'] = checklist.burned
             context_dict['volume'] = checklist.records_of_volume
