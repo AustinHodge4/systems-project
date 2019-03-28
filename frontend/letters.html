@@ -34,10 +34,12 @@
                 {% for letter in letters %}
                   <th scope="row">{{letter.letter_subject}}</th>
                   <td>{{letter.date_modified}}</td>
-                  <!--<td>
-                    <a href="/deq/createEditFacility?id={{facility.pk}}" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
-                    <a href="/deq/createEditFacility?id={{facility.pk}}&delete" class="btn btn-primary" role="button" aria-pressed="true">Delete</a>
-                  </td> -->
+                  <td>
+                <a href="/deq/viewEditLetter?id={{checklist.pk}}" class="btn btn-primary" role="button"
+                  aria-pressed="true">View</a>
+                <a href="/deq/viewEditLetter?id={{checklist.pk}}&delete" class="btn btn-primary" role="button"
+                  aria-pressed="true">Delete</a>
+                </td>
 
                 {% empty %}
 

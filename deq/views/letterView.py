@@ -17,5 +17,13 @@ def letter(request):
 @login_required(login_url='/deq/login/')
 @ensure_csrf_cookie
 def viewEditLetter(request):
-    context_dict = {}
-    return render(request, 'viewEditLetters.html', context_dict)
+        if "id" in request.GET:
+                letter = Letter.objects.get(pk=int(request.GET['id']))
+                if "delete" in request.GET:
+                        letter.delete()
+                        return redirect('/deq/letters/')
+                context_dict['id'] = request.GET['id']
+                context_dict['name'] = letter.subject_name()
+                context_dict['date-modified'] = letter.date_modified()
+                context_dict['content'] = letter.content()
+        return render(request, 'viewEditLetter.html', context_dict)

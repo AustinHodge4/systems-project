@@ -63,11 +63,29 @@ def createEditChecklist(request):
 
         Are the hazardous secondary materials being recycled on-site? (recycled_on_site) 
         '''
-
         letter = Letters()
         letter.checklist = Checklist.objects.get(pk=int(request.POST['checklist']))
-        letter.subject_name = checklist.checklist_name()
-        
+        letter.subject_name = "Inspection Results for " + checklist.checklist_name()
+        letter.date_modified = checklist.date_modified()
+
+        content = ("Are the HSM being released into the environment? "+ str(checklist.release_to_enviornment) + "\n"
+
+        "Are any residuals generated from the recycling process? "+ str(checklist.residue) +" \n "
+
+        "Does the generator maintain records on the volume of recyclable materials generated per " 
+       " month and the volume recycled per month? "+str(checklist.records_of_volume) +" \n "
+
+        "Are these materials burned for energy recovery or used to produce a fuel? "+str(checklist.burned)+" \n"
+
+        "Are these materials used in a manner constituting disposal or, once reclaimed, used in a"
+        "manner constituting disposal? "+str(checklist.disposal)+"\n"
+
+        "Are these materials recyclable materials from which precious metals are reclaimed or spent"
+        "lead-acid batteries being reclaimed? "+str(checklist.recyclable_materials)+" \n"
+
+        "Are the hazardous secondary materials being recycled on-site? "+str(checklist.recycled_on_site)+" \n")
+        letter.content = content
+        letter.save()
 
     elif request.method == "GET":
         print("Here")
@@ -87,7 +105,7 @@ def createEditChecklist(request):
             context_dict['volume'] = checklist.records_of_volume
             context_dict['disposal'] =checklist.disposal
             context_dict['recycled_m']=checklist.recyclable_materials
-            context_dict['recycled_s']=Checklist.recycled_on_site
+            context_dict['recycled_s']=checklist.recycled_on_site
 
         context_dict['facilities'] = Facility.objects.all()
 
