@@ -71,11 +71,11 @@ def createEditChecklist(request):
         Are the hazardous secondary materials being recycled on-site? (recycled_on_site) 
         '''
         letter = Letters()
-        letter.checklist = Checklist.objects.get(pk=int(request.POST['checklist']))
-        letter.subject_name = "Inspection Results for " + checklist.checklist_name()
-        letter.date_modified = checklist.date_modified()
+        letter.checklist = checklist
+        letter.letter_subject = "Inspection Results for " + checklist.checklist_name + " - " + checklist.facility.facility_name 
+        letter.date_modified = checklist.date_modified
 
-        content = ("Are the HSM being released into the environment? "+ str(checklist.release_to_enviornment) + "\n"
+        content = ("Are the HSM being released into the environment? "+ str(checklist.released_to_environment) + "\n"
 
         "Are any residuals generated from the recycling process? "+ str(checklist.residue) +" \n "
 

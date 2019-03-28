@@ -32,15 +32,16 @@
                 </thead>
                 <tbody>
                 {% for letter in letters %}
+                <tr>
                   <th scope="row">{{letter.letter_subject}}</th>
                   <td>{{letter.date_modified}}</td>
                   <td>
-                <a href="/deq/viewEditLetter?id={{checklist.pk}}" class="btn btn-primary" role="button"
+                <a href="/deq/viewEditLetter?id={{letter.pk}}" class="btn btn-primary" role="button"
                   aria-pressed="true">View</a>
-                <a href="/deq/viewEditLetter?id={{checklist.pk}}&delete" class="btn btn-primary" role="button"
+                <a href="/deq/viewEditLetter?id={{letter.pk}}&delete" class="btn btn-secondary" role="button"
                   aria-pressed="true">Delete</a>
                 </td>
-
+              </tr>
                 {% empty %}
 
                 <tr>
