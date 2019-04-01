@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Facility(models.Model):
@@ -29,3 +30,9 @@ class Letters(models.Model):
     content = models.CharField(max_length=800)
     date_modified = models.DateTimeField(auto_now=True)
     checklist = models.ForeignKey(Checklist, on_delete=models.CASCADE)
+
+class Reports(models.Model):
+    report_name = models.CharField(max_length=200)
+    content = models.CharField(max_length=800)
+    date_modified = models.DateTimeField(auto_now=True)
+    employee = models.ForeignKey(User, on_delete=models.CASCADE)

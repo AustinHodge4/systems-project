@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>DEQ WM App - Reports</title>
+</head>
+
+<body>
+    <header>
+        {% include 'nav.html' %}
+    </header>
+    <main>
+        <div class="pt-4"></div>
+        <div class="container">
+            <h1>Create Report</h1>
+            <div class="pt-4"></div>
+
+            <form name="6" method="POST" action="/deq/createEditReport/">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{id}}" />
+
+                <div class="form-group">
+                    <label for="name">Report Name</label>
+                    <input type="text" required class="form-control" name="name" id="name" aria-describedby="name"
+                        value="{{name}}" placeholder="Enter Report Name" {% if view %}readonly{% endif %}>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Report Content</label>
+                    <textarea class="form-control" id="content" name="content" rows="3"
+                        {% if view %}readonly{% endif %}>{{content}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="street">Employee</label>
+                    <select name="employee" required class="custom-select" id="employee"
+                        {% if view %}disabled{% endif %}>
+                        {% for employee in employees %}
+                        <option id="{{employee.pk}}" value="{{employee.pk}}">{{employee.first_name}}
+                            {{employee.last_name}}</option>
+                        {% empty %}
+                        <option value="none" selected>Select a Employee</option>
+                        {%endfor%}
+                    </select>
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            if ("{{selected_employee}}" != '') {
+                                document.getElementById("{{selected_employee}}").selected = true;
+                            }
+                        }
+                    </script>
+                </div>
+
+                {% if date_modified %}
+                <div class="pt-4"></div>
+                <div class="alert alert-primary" role="alert">
+                    Last Modified: {{date_modified}}
+                </div>
+                {% endif %}
+
+                <hr />
+                {% if view == None %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {% endif %}
+
+                <a href="/deq/reports" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>
+            </form>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+</html>

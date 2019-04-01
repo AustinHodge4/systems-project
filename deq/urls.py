@@ -7,6 +7,7 @@ from deq.views.letterView import letter, viewEditLetter
 from deq.views.facilityView import facilityList, createEditFacility
 from deq.views.checklistview import checklist, createEditChecklist
 from deq.views.staffView import staffList, createEditStaff
+from deq.views.reportView import reportList, createEditReport
 urlpatterns = [
     path('', lambda request: redirect('login/', permanent=False)),
     path('home/', home, name='home'),
@@ -20,5 +21,7 @@ urlpatterns = [
     path('createEditChecklist/', createEditChecklist),
     path('staff/', staffList),
     path('createEditStaff/', createEditStaff),
+    path('reports/', reportList),
+    path('createEditReport/', createEditReport),
 
 ]

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>DEQ WM App - Reports</title>
+
+</head>
+
+<body>
+    <header>
+        {% include "nav.html" %}
+    </header>
+    <main>
+        <div class="pt-4"></div>
+        <div class="container">
+            {% if isAdmin == True %}
+            <a href="/deq/createEditReport/" class="btn btn-primary" role="button" aria-pressed="true">Create New
+                Report</a>
+            {% endif %}
+            <div class="pt-4"></div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Report Name</th>
+                            <th scope="col">Employee</th>
+                            <th scope="col">Date Modified</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in reports %}
+                        <tr>
+                            <th scope="row">{{report.report_name}}</th>
+                            <th>{{report.employee.first_name}} {{report.employee.last_name}}</th>
+                            <td>{{report.date_modified}}</td>
+                            <td>
+                                {% if isAdmin == True %}
+                                <a href="/deq/createEditReport?id={{report.pk}}" class="btn btn-primary" role="button"
+                                    aria-pressed="true">Edit</a>
+                                <a href="/deq/createEditReport?id={{report.pk}}&delete" class="btn btn-secondary"
+                                    role="button" aria-pressed="true">Delete</a>
+                                {% else %}
+                                <a href="/deq/createEditReport?id={{report.pk}}&view" class="btn btn-primary"
+                                    role="button" aria-pressed="true">View</a>
+                                {% endif %}
+                                
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan=6>No Reports generated</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+</html>

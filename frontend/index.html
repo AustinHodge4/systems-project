@@ -15,7 +15,7 @@
 
 <body>
   <header>
-      {% include 'nav.html' %}
+    {% include 'nav.html' %}
   </header>
   <main>
     <div class="pt-4"></div>
@@ -38,13 +38,26 @@
       <div class="card">
         <h5 class="card-header">Reports</h5>
         <div class="card-body">
-          <h5 class="card-title">Report #1</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <hr />
-          <h5 class="card-title">Report #1</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          {% for report in reports %}
+            <h5 class="card-title">{{report.report_name}} - {{report.employee.first_name}} {{report.employee.last_name}}
+            </h5>
+            <p class="card-text text-truncate">{{report.content}}</p>
+            <p class="card-text"><small class="text-muted">Last Modified: {{report.date_modified}} </small></p>
+            {% if isAdmin == True %}
+            <a href="/deq/createEditReport?id={{report.pk}}" class="btn btn-primary" role="button"
+              aria-pressed="true">Edit</a>
+            {% else %}
+            <a href="/deq/createEditReport?id={{report.pk}}&view" class="btn btn-primary" role="button"
+              aria-pressed="true">View</a>
+            {% endif %}
+            {% if not forloop.last %}
+            <hr />
+            {% endif %}
+            {% empty %}
+            <h5 class="card-title">No Reports Generated</h5>
+            <p class="card-text">Create staff reports by clicking on reports in the navigation bar or the button below</p>
+            <a href="/deq/reports/" class="btn btn-primary">Go to Reports</a>
+          {% endfor %}
         </div>
       </div>
     </div>
